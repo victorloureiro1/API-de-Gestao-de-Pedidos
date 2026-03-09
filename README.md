@@ -2,7 +2,7 @@
 
 Esta API foi desenvolvida como parte de um desafio técnico para gerir pedidos. O sistema é responsável por receber um pedido HTTP com dados num formato JSON (com chaves em Português) e realizar a transformação (mapping) desses dados para um esquema de base de dados relacional (com colunas em Inglês).
 
-## 🚀 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 * **Node.js** com **Express**: Criação do servidor e roteamento da API.
 
@@ -12,7 +12,7 @@ Esta API foi desenvolvida como parte de um desafio técnico para gerir pedidos. 
 
 * **Swagger UI**: Documentação interativa e ambiente de testes integrado.
 
-## 📋 Funcionalidades (CRUD)
+##  Funcionalidades (CRUD)
 
 A API possui os seguintes endpoints principais:
 
@@ -28,7 +28,7 @@ A API possui os seguintes endpoints principais:
 
 * `DELETE /order/{id}`: Remove um pedido e todos os seus itens associados (utilizando *Delete Cascade*).
 
-## 🔄 Mapping de Dados (De/Para)
+##  Mapping de Dados (De/Para)
 
 O requisito central da aplicação é a transformação do payload. A API realiza o seguinte mapeamento:
 
@@ -55,4 +55,5 @@ Siga as instruções abaixo para executar o projeto na sua máquina:
 1. **Clonar o repositório:**
 
    ```bash
-   git clone <URL_DO_SEU_REPOSITORIO>
+   git clone <https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos>
+
