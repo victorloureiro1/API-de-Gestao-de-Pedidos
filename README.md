@@ -1,66 +1,59 @@
-# API de Gestão de Pedidos (Desafio Técnico)
+# API de Gestão de Pedidos (Desafio Técnico - Jitterbit)
 
-Esta API foi desenvolvida como parte de um desafio técnico para gerir pedidos. O sistema é responsável por receber um pedido HTTP com dados num formato JSON (com chaves em Português) e realizar a transformação (mapping) desses dados para um esquema de base de dados relacional (com colunas em Inglês).
+Esta API foi desenvolvida como parte de um desafio técnico focado em integração e transformação de dados. O sistema recebe pedidos via HTTP em formato JSON  e realiza o mapeamento para um esquema de banco de dados relacional.
+
+##  Desenvolvedor
+* **Nome:** Victor Loureiro
+* **Formação:** Sistemas de Informação - UFJF
+* **Perfil:** QA / Analista de Projetos
 
 ##  Tecnologias Utilizadas
-
-* **Node.js** com **Express**: Criação do servidor e roteamento da API.
-
-* **SQLite3**: Base de dados relacional leve, a operar num ficheiro local (`database.sqlite`) para facilitar a execução e avaliação.
-
-* **JWT (JSON Web Token)**: Implementação de segurança e controlo de acesso nas rotas.
-
+* **Node.js (v24.14.0)**: Ambiente de execução Javascript.
+* **Express**: Framework para roteamento e criação da API.
+* **SQLite3**: Banco de dados relacional local (`database.sqlite`).
+* **JWT (JSON Web Token)**: Segurança e controle de acesso às rotas.
 * **Swagger UI**: Documentação interativa e ambiente de testes integrado.
 
 ##  Funcionalidades (CRUD)
+A API opera na porta **3001** com os seguintes endpoints:
 
-Foram criados os endpoints para as seguintes operações solicitadas no desafio *(Nota: A API corre na porta 3001)*:
-
-* **Criar um novo pedido. (Obrigatório)**
-
-  * URL: `http://localhost:3001/order` (POST)
-
-* **Obter os dados do pedido passando por parâmetro na URL o número do pedido. (Obrigatório)**
-
-  * URL: `http://localhost:3001/order/v10089015vdb-01` (GET)
-
-* **Listar todos os pedidos. (Opcional)**
-
-  * URL: `http://localhost:3001/order/list` (GET)
-
-* **Atualizar o pedido passando por parâmetro na url o número do pedido que será atualizado. (Opcional)**
-
-  * URL: `http://localhost:3001/order/v10089015vdb-01` (PUT)
-
-* **Delete o pedido passando por parâmetro na url o número do pedido que será deletado. (Opcional)**
-
-  * URL: `http://localhost:3001/order/v10089015vdb-01` (DELETE)
+* **Criar Pedido (Obrigatório)**: `POST /order`
+* **Obter Pedido por ID (Obrigatório)**: `GET /order/:numeroPedido`
+* **Listar Pedidos (Opcional)**: `GET /order/list`
+* **Atualizar Pedido (Opcional)**: `PUT /order/:numeroPedido`
+* **Deletar Pedido (Opcional)**: `DELETE /order/:numeroPedido`
 
 ##  Mapping de Dados (De/Para)
-
-O requisito central da aplicação é a transformação do payload. A API realiza o seguinte mapeamento:
+A API realiza a transformação automática do payload de entrada para o banco de dados:
 
 ### Tabela: `Order`
+| Campo Origem (JSON) | Campo Destino (SQL) | Tipo SQL |
+| :--- | :--- | :--- |
+| `numeroPedido` | `orderId` | TEXT (Primary Key) |
+| `valorTotal` | `value` | REAL |
+| `dataCriacao` | `creationDate` | TEXT |
 
-| Payload Recebido (Origem) | Base de Dados (Destino) | Tipo SQL | 
-| ----- | ----- | ----- | 
-| `numeroPedido` | `orderId` | TEXT (Primary Key) | 
-| `valorTotal` | `value` | REAL | 
-| `dataCriacao` | `creationDate` | TEXT | 
+### Tabela: `Items`
+| Campo Origem (JSON) | Campo Destino (SQL) | Tipo SQL |
+| :--- | :--- | :--- |
+| `idItem` | `productId` | INTEGER |
+| `quantidadeItem` | `quantity` | INTEGER |
+| `valorUnitario` | `unitPrice` | REAL |
 
-### Tabela: `Items` (Array)
+##  Como Executar o Projeto
 
-| Payload Recebido (Origem) | Base de Dados (Destino) | Tipo SQL | 
-| ----- | ----- | ----- | 
-| `idItem` | `productId` | INTEGER | 
-| `quantidadeItem` | `quantity` | INTEGER | 
-| `valorItem` | `price` | REAL | 
+Siga os comandos abaixo no seu terminal para configurar o ambiente:
 
-## 🛠️ Como Correr o Projeto Localmente
+1. **Configuração e Inicialização:**
+```bash
+# Clone o repositório
+git clone [https://github.com/victorloureiro1/jitterbit-api-desafio.git](https://github.com/victorloureiro1/jitterbit-api-desafio.git)
 
-Siga as instruções abaixo para executar o projeto na sua máquina:
+# Acesse a pasta do projeto
+cd Jitterbit-Teste
 
-1. **Clonar o repositório:**
+# Instale as dependências necessárias
+npm install
 
-   ```bash
-   git clone [https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos.git](https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos.git)
+# Inicie o servidor
+npm start
