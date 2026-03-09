@@ -14,19 +14,27 @@ Esta API foi desenvolvida como parte de um desafio técnico para gerir pedidos. 
 
 ##  Funcionalidades (CRUD)
 
-A API possui os seguintes endpoints principais:
+Foram criados os endpoints para as seguintes operações solicitadas no desafio *(Nota: A API corre na porta 3001)*:
 
-* `POST /login`: Gera um token JWT de autenticação (simulação de login para testes).
+* **Criar um novo pedido. (Obrigatório)**
 
-* `POST /order`: Recebe o payload do pedido original, realiza o mapping dos dados e guarda na base de dados.
+  * URL: `http://localhost:3001/order` (POST)
 
-* `GET /order/list`: Retorna a lista completa de todos os pedidos e os seus respetivos itens.
+* **Obter os dados do pedido passando por parâmetro na URL o número do pedido. (Obrigatório)**
 
-* `GET /order/{id}`: Retorna os dados detalhados de um pedido específico.
+  * URL: `http://localhost:3001/order/v10089015vdb-01` (GET)
 
-* `PUT /order/{id}`: Atualiza as informações de um pedido existente.
+* **Listar todos os pedidos. (Opcional)**
 
-* `DELETE /order/{id}`: Remove um pedido e todos os seus itens associados (utilizando *Delete Cascade*).
+  * URL: `http://localhost:3001/order/list` (GET)
+
+* **Atualizar o pedido passando por parâmetro na url o número do pedido que será atualizado. (Opcional)**
+
+  * URL: `http://localhost:3001/order/v10089015vdb-01` (PUT)
+
+* **Delete o pedido passando por parâmetro na url o número do pedido que será deletado. (Opcional)**
+
+  * URL: `http://localhost:3001/order/v10089015vdb-01` (DELETE)
 
 ##  Mapping de Dados (De/Para)
 
@@ -34,16 +42,16 @@ O requisito central da aplicação é a transformação do payload. A API realiz
 
 ### Tabela: `Order`
 
-| **Payload Recebido (Origem)** | **Base de Dados (Destino)** | **Tipo SQL** | 
-| :--- | :--- | :--- |
+| Payload Recebido (Origem) | Base de Dados (Destino) | Tipo SQL | 
+| ----- | ----- | ----- | 
 | `numeroPedido` | `orderId` | TEXT (Primary Key) | 
 | `valorTotal` | `value` | REAL | 
 | `dataCriacao` | `creationDate` | TEXT | 
 
 ### Tabela: `Items` (Array)
 
-| **Payload Recebido (Origem)** | **Base de Dados (Destino)** | **Tipo SQL** | 
-| :--- | :--- | :--- |
+| Payload Recebido (Origem) | Base de Dados (Destino) | Tipo SQL | 
+| ----- | ----- | ----- | 
 | `idItem` | `productId` | INTEGER | 
 | `quantidadeItem` | `quantity` | INTEGER | 
 | `valorItem` | `price` | REAL | 
@@ -55,5 +63,4 @@ Siga as instruções abaixo para executar o projeto na sua máquina:
 1. **Clonar o repositório:**
 
    ```bash
-   git clone <https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos>
-
+   git clone [https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos.git](https://github.com/victorloureiro1/API-de-Gestao-de-Pedidos.git)
