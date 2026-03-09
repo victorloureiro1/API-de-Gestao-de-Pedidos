@@ -73,3 +73,22 @@ const swaggerOptions = {
     },
     apis: ['server.js'], // Lê as anotações neste mesmo arquivo
 };
+// ==========================================
+// 3. MIDDLEWARE DE AUTENTICAÇÃO JWT
+// ==========================================
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Formato: "Bearer TOKEN"
+
+    if (!token) {
+        return res.status(401).json({ error: 'Acesso negado. Token não fornecido.' });
+    }
+
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        if (err) {
+            return res.status(403).json({ error: 'Token inválido ou expirado.' });
+        }
+        req.user = user;
+        next();
+    });
+}
