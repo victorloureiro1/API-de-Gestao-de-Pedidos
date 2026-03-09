@@ -47,3 +47,29 @@ function inicializarTabelas() {
         `);
     });
 }
+// ==========================================
+// 2. CONFIGURAÇÃO DO SWAGGER (DOCUMENTAÇÃO)
+// ==========================================
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'API de Pedidos',
+            version: '1.0.0',
+            description: 'API para gerenciamento e transformação de pedidos (Desafio Jitterbit)',
+        },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                }
+            }
+        },
+        security: [{
+            bearerAuth: []
+        }]
+    },
+    apis: ['server.js'], // Lê as anotações neste mesmo arquivo
+};
